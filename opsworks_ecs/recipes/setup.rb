@@ -59,8 +59,8 @@ ruby_block "Check that the ECS agent is running" do
   block do
     ecs_agent = OpsWorks::ECSAgent.new
 
-    Chef::Application.fatal!("ECS agent could not start.") unless ecs_agent.wait_for_availability
+    Chef::Application.fatal!("ECS agent could not start, check https://docs.aws.amazon.com/AmazonECS/latest/developerguide/logs.html#agent-logs for troubleshooting.") unless ecs_agent.wait_for_availability
 
-    Chef::Application.fatal!("ECS agent is registered to a different cluster.") unless ecs_agent.cluster == node["opsworks_ecs"]["ecs_cluster_name"]
+    Chef::Application.fatal!("ECS agent is registered to a different cluster. check https://docs.aws.amazon.com/AmazonECS/latest/developerguide/introspection-diag.html") unless ecs_agent.cluster == node["opsworks_ecs"]["ecs_cluster_name"]
   end
 end
